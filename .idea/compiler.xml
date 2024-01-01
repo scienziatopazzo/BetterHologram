@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Core" />
+        <module name="Common" />
+        <module name="NMS_1_19_R3" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="NMS_1_19_R3 (1)" target="17" />
+      <module name="NMS_1_19_R3 (2)" target="17" />
+      <module name="NMS_1_20_R1" target="1.8" />
+      <module name="NMS_1_8_R3" target="17" />
+      <module name="Plugin" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

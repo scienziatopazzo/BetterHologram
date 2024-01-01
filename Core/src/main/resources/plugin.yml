@@ -1,0 +1,10 @@
+name: BetterHologram
+version: '${project.version}'
+main: dev.vedcodee.it.BetterHologram
+softdepend:
+  - PlaceholderAPI
+commands:
+  hologram:
+    description: Hologram command
+    aliases:
+      - holo
