@@ -5,6 +5,7 @@ import dev.vedcodee.it.NMSAdapter;
 import dev.vedcodee.it.command.SubCommand;
 import dev.vedcodee.it.factory.HologramFactory;
 import dev.vedcodee.it.factory.MessageFactory;
+import dev.vedcodee.it.hologram.Hologram;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class LineHologram extends SubCommand {
                 sendUsage(player);
                 return;
             }
-            for (NMSAdapter hologram : HologramFactory.HOLOGRAMS_CACHE) {
+            for (Hologram hologram : HologramFactory.HOLOGRAMS_CACHE) {
                 if(hologram.name.equalsIgnoreCase(name)) {
                     hologram.addLine(content);
                     new MessageFactory("&aAdded line '%content%&a' to hologram %name%")
@@ -64,7 +65,7 @@ public class LineHologram extends SubCommand {
                 sendUsage(player);
                 return;
             }
-            for (NMSAdapter hologram : HologramFactory.HOLOGRAMS_CACHE) {
+            for (Hologram hologram : HologramFactory.HOLOGRAMS_CACHE) {
                 if(hologram.name.equalsIgnoreCase(name)) {
                     if (!(line >= 0 && line < hologram.lines.size())) {
                         new MessageFactory("&cLine line not found")

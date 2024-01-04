@@ -4,6 +4,7 @@ import dev.vedcodee.it.NMSAdapter;
 import dev.vedcodee.it.command.SubCommand;
 import dev.vedcodee.it.factory.HologramFactory;
 import dev.vedcodee.it.factory.MessageFactory;
+import dev.vedcodee.it.hologram.Hologram;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class CreateHologram extends SubCommand {
             return;
         }
 
-        NMSAdapter hologram = new HologramFactory()
+        Hologram hologram = new HologramFactory()
                 .setName(name)
                 .setLines("First line")
                 .setLocation(player.getLocation())

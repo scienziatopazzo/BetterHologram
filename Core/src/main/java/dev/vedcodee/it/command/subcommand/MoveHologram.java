@@ -4,6 +4,7 @@ import dev.vedcodee.it.NMSAdapter;
 import dev.vedcodee.it.command.SubCommand;
 import dev.vedcodee.it.factory.HologramFactory;
 import dev.vedcodee.it.factory.MessageFactory;
+import dev.vedcodee.it.hologram.Hologram;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class MoveHologram extends SubCommand {
 
         String name = args[1];
 
-        for (NMSAdapter hologram : HologramFactory.HOLOGRAMS_CACHE) {
+        for (Hologram hologram : HologramFactory.HOLOGRAMS_CACHE) {
             if (hologram.name.equalsIgnoreCase(name)) {
 
                 hologram.move(player.getLocation());

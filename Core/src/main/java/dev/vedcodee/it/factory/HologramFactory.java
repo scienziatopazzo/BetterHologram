@@ -2,8 +2,7 @@ package dev.vedcodee.it.factory;
 
 import dev.vedcodee.it.BetterHologram;
 import dev.vedcodee.it.NMSAdapter;
-import dev.vedcodee.it.NMS_1_19_R3;
-import dev.vedcodee.it.nms.NMS;
+import dev.vedcodee.it.hologram.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class HologramFactory {
 
-    public static final List<NMSAdapter> HOLOGRAMS_CACHE = new ArrayList<>();
+    public static final List<Hologram> HOLOGRAMS_CACHE = new ArrayList<>();
 
 
     private String name;
@@ -37,7 +36,7 @@ public class HologramFactory {
         return this;
     }
 
-    public NMSAdapter buildHologram() {
+    public Hologram buildHologram() {
         if(location == null || lines == null || lines.isEmpty() || name == null)
             throw new IllegalArgumentException("Location, lines and name must not be null");
 
@@ -46,7 +45,7 @@ public class HologramFactory {
 
 
 
-    public static NMSAdapter load(FileConfiguration config) {
+    public static Hologram load(FileConfiguration config) {
         String name = config.getString("name");
         World world = Bukkit.getWorld(config.getString("location.world"));
         double x = config.getDouble("location.x");
@@ -61,11 +60,8 @@ public class HologramFactory {
 
 
 
-    public static NMSAdapter createHologram(Location location, List<String> lines, String name) {
-        if (NMS.getAdapter().equals(NMS_1_19_R3.class)) {
-            return new NMS_1_19_R3(location, lines, name, BetterHologram.INSTANCE);
-        }
-        return null;
+    public static Hologram createHologram(Location location, List<String> lines, String name) {
+        return new Hologram(location, lines, name, BetterHologram.INSTANCE);
     }
 
 

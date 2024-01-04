@@ -2,9 +2,9 @@ package dev.vedcodee.it;
 
 import dev.vedcodee.it.command.BetterCommand;
 import dev.vedcodee.it.factory.HologramFactory;
-import dev.vedcodee.it.nms.NMS;
+import dev.vedcodee.it.hologram.Hologram;
+import dev.vedcodee.it.hologram.event.PlayerHitHologram;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,8 +22,6 @@ public final class BetterHologram extends JavaPlugin {
     @Override
     public void onEnable() {
         INSTANCE = this;
-        NMS.init();
-        getLogger().log(Level.INFO, "BetterHologram has enabled NMS! (" + NMS.getVersion() + ") [" + NMS.getAdapter().getName() + "]");
         getCommand("hologram").setExecutor(new BetterCommand());
         if(!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"))
             getLogger().log(Level.INFO, "BetterHologram don't see PlaceholderAPI!");
@@ -37,7 +35,7 @@ public final class BetterHologram extends JavaPlugin {
                 try {
                     FileConfiguration configuration = new YamlConfiguration();
                     configuration.load(file);
-                    NMSAdapter hologram = HologramFactory.load(configuration);
+                    Hologram hologram = HologramFactory.load(configuration);
                     HologramFactory.HOLOGRAMS_CACHE.add(hologram);
                     hologram.create();
                 } catch (IOException | InvalidConfigurationException e) {
@@ -48,10 +46,12 @@ public final class BetterHologram extends JavaPlugin {
             getLogger().log(Level.INFO, "Loaded " + HologramFactory.HOLOGRAMS_CACHE.size() + " Holograms!");
         }
 
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerHitHologram(), this);
+
 
 
         getServer().getScheduler().runTaskTimer(this, () -> {
-            for (NMSAdapter hologram : HologramFactory.HOLOGRAMS_CACHE) {
+            for (Hologram hologram : HologramFactory.HOLOGRAMS_CACHE) {
                 hologram.delete();
                 hologram.create();
             }
@@ -64,7 +64,7 @@ public final class BetterHologram extends JavaPlugin {
     @Override
     public void onDisable() {
 
-        HologramFactory.HOLOGRAMS_CACHE.forEach(NMSAdapter::delete);
+        HologramFactory.HOLOGRAMS_CACHE.forEach(Hologram::delete);
 
     }
 }

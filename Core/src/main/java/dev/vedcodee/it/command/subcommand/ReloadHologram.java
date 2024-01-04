@@ -4,6 +4,7 @@ import dev.vedcodee.it.NMSAdapter;
 import dev.vedcodee.it.command.SubCommand;
 import dev.vedcodee.it.factory.HologramFactory;
 import dev.vedcodee.it.factory.MessageFactory;
+import dev.vedcodee.it.hologram.Hologram;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -26,7 +27,7 @@ public class ReloadHologram extends SubCommand {
             return;
         }
 
-        for (NMSAdapter hologram : HologramFactory.HOLOGRAMS_CACHE) {
+        for (Hologram hologram : HologramFactory.HOLOGRAMS_CACHE) {
             hologram.delete();
             hologram.create();
         }

@@ -1,26 +1,19 @@
-package dev.vedcodee.it;
+package dev.vedcodee.it.hologram;
 
-import dev.vedcodee.it.NMSAdapter;
 import dev.vedcodee.it.factory.MessageFactory;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public final class NMS_1_19_R3 extends NMSAdapter {
+public class Hologram extends AbstractHologram {
 
 
     private final List<ArmorStand> hologram; // holograms of lines
 
-    public NMS_1_19_R3(Location location, List<String> lines, String name, JavaPlugin plugin) {
+    public Hologram(Location location, List<String> lines, String name, JavaPlugin plugin) {
         super(location, new MessageFactory(lines).setPlaceholder(null).buildList(), name, plugin);
         this.hologram = new ArrayList<>();
         this.lines = new ArrayList<>(lines); // Ensure that lines is an ArrayList
@@ -36,7 +29,6 @@ public final class NMS_1_19_R3 extends NMSAdapter {
             armorStand.setCustomNameVisible(true);
             armorStand.setCustomName(lines.get(i));
             armorStand.setGravity(false);
-            armorStand.setInvulnerable(true);
             hologram.add(armorStand);
         }
         saveLinesToConfig();
@@ -61,7 +53,6 @@ public final class NMS_1_19_R3 extends NMSAdapter {
         armorStand.setCustomNameVisible(true);
         armorStand.setCustomName(content);
         armorStand.setGravity(false);
-        armorStand.setInvulnerable(true);
         hologram.add(armorStand);
 
         List<String> updatedLines = new ArrayList<>(lines);
@@ -145,7 +136,6 @@ public final class NMS_1_19_R3 extends NMSAdapter {
             hologram.get(i).teleport(location.clone().add(0, 0.3 * i, 0));
         }
     }
-
 
 
 
